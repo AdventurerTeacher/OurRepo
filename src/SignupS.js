@@ -34,45 +34,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignupS() {
-  const classes = useStyles();
- 
-  const [data, setData] = React.useState({
-    name: "",
-    email: "",
-    password: ""
-  });
-
-  
-  const handleChange = (prop) => (event) => {
-    setData({ ...data, [prop]: event.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-  
-
-    var std = {
-      name: name,
-      email: email,
-      password: password
-    };
-
-  axios
-  .post("http://localhost:9000/SignupS", std)
-  .then((res) => {
-    document.getElementById("done").innerText =
-      "Account created Successfully ";
-  })
-  .catch(
-    () =>
-      (document.getElementById("done").innerText =
-        "The email is already exists ")
-  );
- }
 
 
   return (
