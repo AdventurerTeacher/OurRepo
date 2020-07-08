@@ -7,7 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-
+import LoginS from './LoginS';
+import SignupS from './SignupS';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,10 +40,11 @@ export default  function App() {
             Book Teachers
           </Typography>
           <Button color="inherit" >Teacher</Button>
-          
           <Button color="inherit" herf="/Students">Student</Button>
         </Toolbar>
       </AppBar>
+      <SignupS/>
+      {/* <LoginS/> */}
     </div>
   );
 }
