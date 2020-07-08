@@ -4,7 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var handlers = require('./handlres.js')
 var app = express();
-//var session = require('express-session')
+var session = require('express-session')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../react-client/dist'));
@@ -46,9 +46,9 @@ app.get('/', function(req, res, next) {
   dd(res)
   if (req.session.views) {
     req.session.views++
-    res.setHeader('Content-Type', 'text/html')
-    res.write('<p>views: ' + req.session.views + '</p>')
-    res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+    res.setHeader('Content-Type', 'Application/json')
+    res.write(reg.newUser)
+    // res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
     res.end()
   } else {
     req.session.views = 1

@@ -112,22 +112,22 @@ login:function (req, res)  {
 		});
 	},
 addTeacher:function(req,res){
-	var phoneNum = req.body.phoneNum;
-	var name = req.body.name;
+	// var phoneNum = req.body.phoneNum;
+	// var name = req.body.name;
 	var price = req.body.price;
 	var Email = req.body.Email;
 	var Discription = req.body.Discription;
 	var place = req.body.place;
 	var subject = req.body.subject;
-	const newAdv= new ADV3({
-		phoneNum,
-		name,
-		price,
-		Email,
-		Discription,
-		place,
-		subject
-	})
+	// const newAdv= new ADV3({
+	// 	phoneNum,
+	// 	name,
+	// 	price,
+	// 	Email,
+	// 	Discription,
+	// 	place,
+	// 	subject
+	// })
 
 		newAdv.save()
 		.then(()=> res.json("ADV Added"))
@@ -138,13 +138,13 @@ var username=req.body.userName
 var email=req.body.email
 var phoneNumber=req.body.phoneNumber
 // Step 1
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL||"bookteacheronline@gmail.com",
-        pass: process.env.PASSWORD ||"BookTeacherOnline123456789"
-    }
-});
+// let transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: process.env.EMAIL||"bookteacheronline@gmail.com",
+//         pass: process.env.PASSWORD ||"BookTeacherOnline123456789"
+//     }
+// });
 // Step 2
 let mailOptions = {
     from: email ,
