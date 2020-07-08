@@ -13,7 +13,7 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 // create autho schema contain informations of users
-const authoSchema =new Schema({
+const TeacherSchema =new Schema({
 
   email: {type: String,
       required: true,
@@ -23,30 +23,55 @@ const authoSchema =new Schema({
   password:{type: String,
       required: true,
        minlength: 8
-  }
-});
-
-
-
-var AdvSchema3= new Schema({
+  },
   phone : Number,
   name : { type: String, required: true },
-  price :{ type: String, required: true},
-  email : String,
-  description:String,
-  place: String ,
-  subject: String ,
-  create_date:{ type: Date, default: Date.now }
+  place: String,
+  major: String ,
+  courses: [{price :{ type: String, required: true},
+    description:String,
+    subject: String ,
+    create_date:{ type: Date, default: Date.now }
+  }]
 });
-const ADV3 = mongoose.model('ADV3', AdvSchema3);
 
-const Autho = mongoose.model('Autho', authoSchema);
+
+
+// var AdvSchema3= new Schema({
+//   price :{ type: String, required: true},
+//   description:String,
+//   subject: String ,
+//   create_date:{ type: Date, default: Date.now }
+// });
+
+
+var stdSchema = new Schema({
+  name : { type: String, required: true },
+  email: {type: String,
+    required: true,
+    unique: true,
+    minlength: 3,
+},
+password:{type: String,
+    required: true,
+     minlength: 8
+},
+ teachers : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }]
+})
+
+// const ADV3 = mongoose.model('ADV3', AdvSchema3);
+
+const Teacher = mongoose.model('Teacher', TeacherSchema, 'Teacher');
+
+const Std = mongoose.model('Std', stdSchema);
 
 // export's part
-module.exports.ADV3  = ADV3;
+// module.exports.ADV3  = ADV3;
 // module.exports.Teacher = Teacher;
-module.exports.Autho  = Autho;
 
+module.exports.Teacher = Teacher;
+
+module.exports.Std  = Std;
 // //select all from teachers
 // var selectAllfromTeacher = function() {
 // Teacher.find(function (err, data) {

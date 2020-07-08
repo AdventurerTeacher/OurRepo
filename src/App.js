@@ -38,9 +38,8 @@ export default  function App() {
           <Typography variant="h6" className={classes.title}>
             Book Teachers
           </Typography>
-          <Button color="inherit" >Teacher</Button>
-          
-          <Button color="inherit" herf="/Students">Student</Button>
+          <Button color="inherit" herf="">Teacher</Button>
+          <Button color="inherit" herf="./Students">Student</Button>
         </Toolbar>
       </AppBar>
     </div>
