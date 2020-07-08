@@ -19,6 +19,48 @@ const passport = require('passport');
 // Handlers to handle req in express server
 // Handlers to handle req in express server
 module.exports = {
+//...........................
+SignupS: function (req, res)  {
+    var name = req.body.name;
+    var email = req.body.email;
+    var hash = bcrypt.hashSync(req.body.password, 10);
+    var password = hash;
+
+  var user =  Std.findOne({ email: req.body.email });
+  if (user) {
+      return res.send('Email already exists');
+  }else{
+      const newUser = new Std({
+          name,
+          email,
+          password
+      });
+     newUser.save();
+      res.send(newUser);
+  }
+  },
+
+  LoginS:function (req, res)  {
+    var email = req.body.email;
+   var password = req.body.password;
+  Std.findOne({ email: email})
+  .then(user => {
+    if (!user) {
+      return res.send("Email not found" );
+    }
+      bcrypt.compare(password , user.password, function(err,result){
+        if (err) {
+          return res.end(err);
+        } else if(result === true){
+          return res.send(result);
+        }
+      })
+  });
+  },
+
+//..............................
+
+
 	signup: function (req, res)  {
   var newUser = new Autho({
     email: req.body.email,

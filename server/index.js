@@ -16,6 +16,10 @@ app.get('/mainForm', handlers.addTeacher)
 app.get('/findOne', handlers.showSpecificTeacher)
 app.post('/findOne', handlers.showSpecificTeacher)
 
+app.post('/SignupS', handlers.SignupS);
+app.post('/LoginS', handlers.LoginS)
+
+
 app.post('/sendemail', handlers.sendEmail)
 app.post('/logout', handlers.logout)
 app.get('/', (req, res) => {
