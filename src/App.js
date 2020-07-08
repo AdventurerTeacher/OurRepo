@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+// const teacher = (props) => {
+//   props.history.push({ pathname: '/LoginT' });
+// }
 
 
 export default  function App() {

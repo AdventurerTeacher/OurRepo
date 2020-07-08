@@ -1,5 +1,6 @@
 var mongoose=require('mongoose')
 mongoose.Promise = global.Promise;
+
 // import encrypt lib
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
