@@ -1,30 +1,66 @@
 var mongoose=require('mongoose')
 mongoose.Promise = global.Promise;
+
 // import encrypt lib
 var bcrypt = require("bcrypt");
 var saltRounds = 10;
 // node mailer tosend email
 //require('dotenv').config()
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
 const log = console.log;
 require('dotenv').config()
 // import models from DB
 var items = require('../database-mongo');
-var Autho = items.Autho;
-var ADV3=items.ADV3;
+var Std = items.Std;
+var Teacher =items.Teacher;
 //log out
-const passport = require('passport');
-//const passportHttp = require('passport-http');
-//const logout = require('express-passport-logout');
+// const passport = require('passport');
+// const passportHttp = require('passport-http');
+// const logout = require('express-passport-logout');
 // Handlers to handle req in express server
 // Handlers to handle req in express server
-module.exports = {
+ module.exports = {
+   SignupS: function (req, res)  {
+  var name = req.body.name;
+  var email = req.body.email;
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  var password = hash;
+  var user = Std.findOne({ email: req.body.email });
+  if (user) {
+      return res.send('That email already exists!');
+  }else{
+      const newUser = new User({
+          name,
+          email,
+          password
+      });
+       newUser.save();
+      res.send(newUser);
+  }
+  },
+  LoginS:function (req, res)  {
+    var email = req.body.email;
+    var password = req.body.password;
+    Std.findOne({ email: email}).then(user => {
+      if (!user) {
+        return res.json("Email not found" );
+      }
+        bcrypt.compare(password , user.password, function(err,result){
+          if (err) {
+            return res.json(err);
+          } else if(result === true){
+            return res.json(result);
+          }
+        })
+    });
+  },
+  
 	signup: function (req, res)  {
-  var newUser = new Autho({
+  var newUser = new Teacher({
     email: req.body.email,
     password: req.body.password
   });
-   Autho.findOne({ email: newUser.email })
+   Teacher.findOne({ email: newUser.email })
     .then( profile => {
       if (!profile) {
         bcrypt.hash(newUser.password, saltRounds, function (err, hash)  {
@@ -58,7 +94,7 @@ login:function (req, res)  {
   var newUser = {};
   newUser.email = req.body.email;
   newUser.password = req.body.password;
-   Autho.findOne({ email: newUser.email })
+  Teacher.findOne({ email: newUser.email })
     .then(profile => {
       if (!profile) {
         res.send("User not exist");
@@ -83,7 +119,7 @@ login:function (req, res)  {
     });
 },
   getAlldatafromAuthoSchema:function(req,res){
-	 Autho.find({}, function(err, user){
+    Teacher.find({}, function(err, user){
       if(err){
         res.json(err);
       } else {
@@ -92,7 +128,7 @@ login:function (req, res)  {
     });
   },
   showTeachers: function(req, res)  {
-		ADV3.find(function(err, teachers)  {
+		Teacher.find(function(err, teachers)  {
 			if(err){
 				throw err;
 			}
@@ -102,7 +138,7 @@ login:function (req, res)  {
 	 showSpecificTeacher: function(req, res)  {
        var toShow= req.body
        console.log('hellllo1',toShow)
-		ADV3.find(toShow,function(err, teachers)  {
+       Teacher.find(toShow,function(err, teachers)  {
       console.log('hello2',teachers[0])
 			if(err){
 				throw err;
@@ -118,7 +154,7 @@ addTeacher:function(req,res){
 	var Discription = req.body.Discription;
 	var place = req.body.place;
 	var subject = req.body.subject;
-	const newAdv= new ADV3({
+	const Teacher = new Teacher({
 		phoneNum,
 		name,
 		price,
@@ -136,7 +172,7 @@ sendEmail:function(req,res){
 var username=req.body.userName
 var email=req.body.email
 var phoneNumber=req.body.phoneNumber
-// Step 1
+//Step 1
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -165,11 +201,5 @@ req.logout()
 res.redirect("/")
 console.log("log out ")
   }
-// console.log("I am Logout oo")
-//     req.logout();
-//     res.json({
-//             status: "logout",
-//             msg:"Please Log In again"
-//          });
-// }
+
 }
