@@ -12,7 +12,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+<<<<<<< HEAD
+=======
 import React, { useState } from 'react';
+
 // function Copyright() {
 //   return (
 //     <Typography variant="body2" color="textSecondary" align="center">
@@ -25,10 +29,9 @@ import React, { useState } from 'react';
 //     </Typography>
 //   );
 // }
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
 
 
+>>>>>>> 51ae5ed76824752dfc94d0c91e94b44cb107176e
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -48,8 +51,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
 export default function LoginS() {
   const classes = useStyles();
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -58,6 +63,7 @@ export default function LoginS() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
+
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
@@ -105,8 +111,7 @@ export default function LoginS() {
             <Grid item>
               <Link href="./SignupS" variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
+              </Link>            </Grid>
           </Grid>
         </form>
       </div>
