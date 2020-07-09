@@ -56,8 +56,8 @@ var stdSchema = new Schema({
 password:{type: String,
     required: true,
      minlength: 8
-},
- teachers : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }]
+}
+//  teachers : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' }]
 })
 
 const TeacherSchema =new Schema({

@@ -14,46 +14,46 @@ var items = require('../database-mongo');
 var Std = items.Std;
 var Teacher =items.Teacher;
 //log out
-const passport = require('passport');
-//const passportHttp = require('passport-http');
-//const logout = require('express-passport-logout');
+// const passport = require('passport');
+// const passportHttp = require('passport-http');
+// const logout = require('express-passport-logout');
 // Handlers to handle req in express server
 // Handlers to handle req in express server
  module.exports = {
-//    SignupS: function (req, res)  {
-//   var name = req.body.name;
-//   var email = req.body.email;
-//   var hash = bcrypt.hashSync(req.body.password, 10);
-//   var password = hash;
-//   var user = Std.findOne({ email: req.body.email });
-//   if (user) {
-//       return res.send('That email already exists!');
-//   }else{
-//       const newUser = new User({
-//           name,
-//           email,
-//           password
-//       });
-//        newUser.save();
-//       res.send(newUser);
-//   }
-//   },
-//   LoginS:function (req, res)  {
-//     var email = req.body.email;
-//     var password = req.body.password;
-//     Std.findOne({ email: email}).then(user => {
-//       if (!user) {
-//         return res.json("Email not found" );
-//       }
-//         bcrypt.compare(password , user.password, function(err,result){
-//           if (err) {
-//             return res.json(err);
-//           } else if(result === true){
-//             return res.json(result);
-//           }
-//         })
-//     });
-//   },
+   SignupS: function (req, res)  {
+  var name = req.body.name;
+  var email = req.body.email;
+  var hash = bcrypt.hashSync(req.body.password, 10);
+  var password = hash;
+  var user = Std.findOne({ email: req.body.email });
+  if (user) {
+      return res.send('That email already exists!');
+  }else{
+      const newUser = new User({
+          name,
+          email,
+          password
+      });
+       newUser.save();
+      res.send(newUser);
+  }
+  },
+  LoginS:function (req, res)  {
+    var email = req.body.email;
+    var password = req.body.password;
+    Std.findOne({ email: email}).then(user => {
+      if (!user) {
+        return res.json("Email not found" );
+      }
+        bcrypt.compare(password , user.password, function(err,result){
+          if (err) {
+            return res.json(err);
+          } else if(result === true){
+            return res.json(result);
+          }
+        })
+    });
+  },
   
 	signup: function (req, res)  {
   var newUser = new Teacher({

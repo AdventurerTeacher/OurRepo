@@ -4,43 +4,36 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var handlers = require('./handlres.js')
 var app = express();
-var mongoose=require('mongoose')
-// mongoose.connect('mongodb://localhost/teachersDataBase');
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/teachersDataBase');
 // mongoose.Promise = global.Promise;
-// var items = require('../database-mongo');
-// var Std = items.Std;
+//  var items = require('../database-mongo');
+//  var Std = items.Std;
 //var Teacher =items.Teacher;
 //var session = require('express-session')
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../react-client/dist'));
-app.post('/signup', handlers.signup);
-app.post('/login', handlers.login)
-app.get('/login', handlers.login)
-app.get('/ret', handlers.showTeachers)
-app.post('/mainForm', handlers.addTeacher)
-app.get('/mainForm', handlers.addTeacher)
-app.get('/findOne', handlers.showSpecificTeacher)
-app.post('/findOne', handlers.showSpecificTeacher)
 
-app.post('/sendemail', handlers.sendEmail)
-app.post('/logout', handlers.logout)
-app.get('/', (req, res) => {
- // sess=req.session;
-  res.status(200).send('Success');
+app.post('/SignupS', function (req, res) {
+  console.log(req)
+  var user = {
+     Name: req.body.name,
+     Email: req.body.email,
+     Password: req.body.password
+ };
+ 
+ var UserReg = mongoose.model('Std', StdSchema);
+ UserReg.create(user, function(err, newUser) {
+    if(err)
+    return res.send('Error!');
+    ;
+    //req.session.user = email;
+    return res.send('Logged In!');
+ });
 });
 
-// app.post('/SignupS', handlers.SignupS);
-// app.post('/LoginS', handlers.LoginS)
-//app.get('/LoginS', handlers.LoginS)
 
-// app.post('/SignupS', function (req,res)  {
- 
-// })
-// app.post("/LoginS",function (req, res) {
-  
-// });
+var cors = require('cors')
 
+//app.use(cors())
 
 
 var port = 9000
@@ -75,3 +68,5 @@ app.listen(port, function() {
 //     res.end('welcome to the session demo. refresh!')
 //   }
 // })
+
+
